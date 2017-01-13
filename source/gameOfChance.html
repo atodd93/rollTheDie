@@ -1,0 +1,65 @@
+<html>
+	<head>
+		<meta charset='utf-8' />
+		<script type='text/javascript'>
+			
+			
+			function rollAndUpdate()
+			{
+				
+				document.getElementById('resultField').value = 0;
+				var roll;
+				var sum = 0;
+				var history = document.getElementById('history');
+				var historyString = '<ol>';
+				history.innerHTML = '';
+				for(var i = 0; i < document.getElementById('count').value; i++ ) 
+				{
+					roll = rollTheDie(); 
+					historyString += "<li>" + roll + "</li>"
+					sum += roll; 
+				}
+				history.innerHTML += historyString + '</ol>';
+				document.getElementById('resultField').innerHTML  = (sum + parseInt(document.getElementById('modifier').value));
+				function rollTheDie() 
+				{
+					return Math.floor(Math.random() * document.getElementById('sides').value)+1;
+				}
+				
+			}
+		</script>
+		<style>
+			label, #history, #rollButton, output
+			{
+				font-size: 45pt;
+				margin-left:5%;
+			}
+			input
+			{
+				height: 100px; 
+				width: 250px; 
+				font-size: 45pt;
+			}
+			.inputValue
+			{
+				width: 100px;
+			}
+		</style>
+		<title> Roll the die! </title>
+	</head>
+	<body>
+		<div>
+			<label> Select the sides! </label>
+			<input class='inputValue' id = 'count' type='number' min='1' value = '1'/>
+			<label style='margin-left:0px;'>d</label>
+			<input style='width: 150px;'class='inputValue' id='sides' type='number' min='2' value = '2'/>
+			<label style='margin-left:0px;'>+</label>
+			<input class='inputValue' id='modifier' type='number' value = '0'/>
+			<br />
+			<br />
+			<input class='interact' id='rollButton' type="button" onclick='rollAndUpdate();' value='Roll Me!'/>
+			<output id='resultField'></output>
+		</div>
+		<div id='history'></div>
+	</body>
+</html>
